@@ -8,18 +8,16 @@ import java.lang.reflect.Method;
  * @param <T> class type
  * @author Vladislav Bauer
  */
-
 public final class ObjectConverterInfoValue<T> {
 
     private final Method method;
-    private final T object;
 
+    private final T object;
 
     public ObjectConverterInfoValue(final Method method, final T object) {
         this.method = method;
         this.object = object;
     }
-
 
     /**
      * Get method that is used to convert data.
@@ -27,7 +25,7 @@ public final class ObjectConverterInfoValue<T> {
      * @return method for conversion
      */
     public Method getMethod() {
-        return method;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -35,7 +33,7 @@ public final class ObjectConverterInfoValue<T> {
      * @return root objectF
      */
     public T getObject() {
-        return object;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -43,7 +41,6 @@ public final class ObjectConverterInfoValue<T> {
      */
     @Override
     public String toString() {
-        return String.format("[%s %s]", getMethod(), getObject());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

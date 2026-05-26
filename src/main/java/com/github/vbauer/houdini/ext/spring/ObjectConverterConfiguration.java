@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Vladislav Bauer
  */
-
 @Configuration
 public class ObjectConverterConfiguration {
 
@@ -25,7 +24,7 @@ public class ObjectConverterConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public ObjectConverterRegistry objectConverterRegistry() {
-        return new ObjectConverterRegistryImpl();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -36,10 +35,8 @@ public class ObjectConverterConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ObjectConverterService objectConverterService(
-        final ObjectConverterRegistry objectConverterRegistry
-    ) {
-        return new ObjectConverterServiceImpl(objectConverterRegistry);
+    public ObjectConverterService objectConverterService(final ObjectConverterRegistry objectConverterRegistry) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -50,10 +47,7 @@ public class ObjectConverterConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ObjectConverterBeanPostProcessor objectConverterBeanPostProcessor(
-        final ObjectConverterService objectConverterService
-    ) {
-        return new ObjectConverterBeanPostProcessor(objectConverterService);
+    public ObjectConverterBeanPostProcessor objectConverterBeanPostProcessor(final ObjectConverterService objectConverterService) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

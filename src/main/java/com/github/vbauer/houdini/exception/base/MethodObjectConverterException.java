@@ -5,19 +5,17 @@ import java.util.Arrays;
 /**
  * @author Vladislav Bauer
  */
-
 @SuppressWarnings("serial")
 public abstract class MethodObjectConverterException extends ObjectConverterException {
 
     private final Class<?>[] parameterTypes;
-    private final Class<?> returnType;
 
+    private final Class<?> returnType;
 
     public MethodObjectConverterException(final Class<?> returnType, final Class<?>... parameterTypes) {
         this.returnType = returnType;
         this.parameterTypes = parameterTypes;
     }
-
 
     /**
      * Retrieve a copy of the input parameter types.
@@ -25,7 +23,7 @@ public abstract class MethodObjectConverterException extends ObjectConverterExce
      * @return input parameter types
      */
     public Class<?>[] getParameterTypes() {
-        return Arrays.copyOf(parameterTypes, parameterTypes.length);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -34,7 +32,6 @@ public abstract class MethodObjectConverterException extends ObjectConverterExce
      * @return return type
      */
     public Class<?> getReturnType() {
-        return returnType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

@@ -3,7 +3,6 @@ package com.github.vbauer.houdini.service.impl;
 import com.github.vbauer.houdini.model.ObjectConverterInfoValue;
 import com.github.vbauer.houdini.service.ObjectConverterRegistry;
 import com.github.vbauer.houdini.service.ObjectConverterService;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,13 +13,11 @@ import java.util.Set;
 /**
  * {@link ObjectConverterService}.
  *
- * @author Vladislav Bauer 
+ * @author Vladislav Bauer
  */
-
 public class ObjectConverterServiceImpl implements ObjectConverterService {
 
     private final ObjectConverterRegistry converterRegistry;
-
 
     public ObjectConverterServiceImpl() {
         this(new ObjectConverterRegistryImpl());
@@ -30,13 +27,12 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
         this.converterRegistry = converterRegistry;
     }
 
-
     /**
      * {@inheritDoc}
      */
     @Override
     public ObjectConverterRegistry getConverterRegistry() {
-        return converterRegistry;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -44,9 +40,7 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
      */
     @Override
     public <R> R convert(final Class<R> resultClass, final Object... sources) {
-        final ObjectConverterRegistry registry = getConverterRegistry();
-        final ObjectConverterInfoValue<R> converterInfo = registry.findConverter(resultClass, sources);
-        return processObject(converterInfo, sources);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -54,7 +48,7 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
      */
     @Override
     public <R, S> Set<R> convert(final Class<R> resultClass, final Set<S> sources) {
-        return processObjects(sources, resultClass, new HashSet<>());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,7 +56,7 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
      */
     @Override
     public <R, S> List<R> convert(final Class<R> resultClass, final List<S> sources) {
-        return processObjects(sources, resultClass, new ArrayList<>());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,7 +64,7 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
      */
     @Override
     public <R, S> Object convertToOneOrList(final Class<R> resultClass, final List<S> sources) {
-        return oneOrMany(processObjects(sources, resultClass, new ArrayList<>()));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,33 +72,25 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
      */
     @Override
     public <R, S> Object convertToOneOrSet(final Class<R> resultClass, final Set<S> sources) {
-        return oneOrMany(processObjects(sources, resultClass, new HashSet<>()));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /*
      * Internal API.
      */
-
-    private <R, C extends Collection<R>> C processObjects(
-        final Collection<?> sources, final Class<R> resultClass, final C result
-    ) {
+    private <R, C extends Collection<R>> C processObjects(final Collection<?> sources, final Class<R> resultClass, final C result) {
         for (final Object source : sources) {
             final ObjectConverterRegistry registry = getConverterRegistry();
             final ObjectConverterInfoValue<R> converterInfo = registry.findConverter(resultClass, source);
-
             result.add(processObject(converterInfo, source));
         }
         return result;
     }
 
     @SuppressWarnings("unchecked")
-    private <R> R processObject(
-        final ObjectConverterInfoValue<R> converterInfo, final Object... sources
-    ) {
+    private <R> R processObject(final ObjectConverterInfoValue<R> converterInfo, final Object... sources) {
         final Method method = converterInfo.getMethod();
         final Object object = converterInfo.getObject();
-
         try {
             return (R) method.invoke(object, sources);
         } catch (final Exception ex) {
@@ -115,7 +101,7 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
 
     private Object oneOrMany(final Collection<?> collection) {
         final int size = collection == null ? 0 : collection.size();
-        switch (size) {
+        switch(size) {
             case 0:
                 return null;
             case 1:
@@ -124,5 +110,4 @@ public class ObjectConverterServiceImpl implements ObjectConverterService {
                 return collection;
         }
     }
-
 }

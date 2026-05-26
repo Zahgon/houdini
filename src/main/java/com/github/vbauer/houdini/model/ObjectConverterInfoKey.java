@@ -9,18 +9,16 @@ import java.util.Objects;
  * @param <R> class type
  * @author Vladislav Bauer
  */
-
 public final class ObjectConverterInfoKey<R> {
 
     private final Class<?>[] sources;
-    private final Class<R> target;
 
+    private final Class<R> target;
 
     public ObjectConverterInfoKey(final Class<R> target, final Class<?>... sources) {
         this.target = target;
         this.sources = sources;
     }
-
 
     /**
      * Get array with input parameter classes.
@@ -29,7 +27,7 @@ public final class ObjectConverterInfoKey<R> {
      */
     @SuppressWarnings("all")
     public Class<?>[] getSources() {
-        return sources;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -39,7 +37,7 @@ public final class ObjectConverterInfoKey<R> {
      */
     @SuppressWarnings("all")
     public Class<R> getTarget() {
-        return target;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -47,7 +45,7 @@ public final class ObjectConverterInfoKey<R> {
      */
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new Object[]{sources.length, target});
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -56,12 +54,7 @@ public final class ObjectConverterInfoKey<R> {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
-        if (!(obj instanceof ObjectConverterInfoKey)) {
-            return false;
-        }
-
-        final ObjectConverterInfoKey<R> other = (ObjectConverterInfoKey<R>) obj;
-        return hasSameTarget(other) && hasSameSources(other);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,14 +62,12 @@ public final class ObjectConverterInfoKey<R> {
      */
     @Override
     public String toString() {
-        return String.format("[%s %s]", Arrays.toString(getSources()), getTarget());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /*
      * Internal API.
      */
-
     private boolean hasSameTarget(final ObjectConverterInfoKey<R> other) {
         return Objects.equals(getTarget(), other.getTarget());
     }
@@ -84,28 +75,20 @@ public final class ObjectConverterInfoKey<R> {
     private boolean hasSameSources(final ObjectConverterInfoKey<R> other) {
         final Class<?>[] selfSources = getSources();
         final Class<?>[] otherSources = other.getSources();
-
         final int selfLength = selfSources.length;
         final int otherLength = otherSources.length;
-
         if (selfLength != otherLength) {
             return false;
         } else if (selfLength == 0) {
             return true;
         }
-
         for (int i = 0; i < selfLength; i++) {
             final Class<?> selfClass = selfSources[i];
             final Class<?> otherClass = otherSources[i];
-
-            if (!Objects.equals(selfClass, otherClass)
-                && !Objects.equals(selfClass, Object.class)
-                && !Objects.equals(otherClass, Object.class)) {
+            if (!Objects.equals(selfClass, otherClass) && !Objects.equals(selfClass, Object.class) && !Objects.equals(otherClass, Object.class)) {
                 return false;
             }
         }
-
         return true;
     }
-
 }

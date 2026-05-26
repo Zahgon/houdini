@@ -17,11 +17,9 @@ import com.google.inject.spi.TypeListener;
  *
  * @author Vladislav Bauer
  */
-
 public class ObjectConverterModule extends AbstractModule {
 
     private final Matcher<Object> typeMatcher;
-
 
     public ObjectConverterModule() {
         this(Matchers.any());
@@ -31,29 +29,21 @@ public class ObjectConverterModule extends AbstractModule {
         this.typeMatcher = typeMatcher;
     }
 
-
     /**
      * {@inheritDoc}
      */
     @Override
     protected void configure() {
-        final ObjectConverterRegistry registry = new ObjectConverterRegistryImpl();
-        final ObjectConverterServiceImpl converter = new ObjectConverterServiceImpl(registry);
-
-        bind(ObjectConverterRegistry.class).toInstance(registry);
-        bind(ObjectConverterService.class).toInstance(converter);
-
-        bindListener(typeMatcher, createTypeListener(registry));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     private TypeListener createTypeListener(final ObjectConverterRegistry registry) {
         return new TypeListener() {
+
             @Override
             public <I> void hear(final TypeLiteral<I> typeLiteral, final TypeEncounter<I> typeEncounter) {
-                typeEncounter.register((InjectionListener<I>) registry::registerConverters);
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         };
     }
-
 }
